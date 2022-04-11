@@ -2,8 +2,10 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#F7F8FA",
+    height: "100%",
+    flexDirection: "column",
+    alignItems: "center",
   },
   header: {
     height: "10%",
@@ -15,25 +17,41 @@ const styles = StyleSheet.create({
   headerItem: {
     marginLeft: "auto",
     marginRight: 15,
-    width: 30, 
-    height: 30, 
+    width: 30,
+    height: 30,
   },
   arrow: {
-      alignItems: "flex-start",
-      marginLeft: "5%", 
-  }, 
-  refresh: {},
+    alignItems: "flex-start",
+    marginLeft: "5%",
+  },
   title: {
     fontSize: 30,
+    textAlign: "center",
+    width: "90%",
+    marginTop: "2%",
   },
   content: {
     flexDirection: "column",
     alignItems: "center",
+    marginTop: "5%",
+  },
+  item: {
+    width: "85%",
+    height: 60,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: "#15AB69",
+    backgroundColor: "#fff",
+  },
+  freqItem: {
+    marginTop: "5%",
   },
   dayItem: {
-    width: Dimensions.get("window").width * 0.85,
-    height: 50,
-    marginTop: "5%", 
+    marginTop: "2%",
+  },
+  garageWrap: {
+    flexGrow: 1,
+    marginTop: "20%",
   },
   circle: {
     width: 120,
@@ -45,45 +63,35 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   button: {
-    width: Dimensions.get("window").width * 0.85,
+    width: "100%",
     height: "100%",
-    borderRadius: 10,
-    borderWidth: 0.5,
-    borderColor: "#15AB69",
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "white",
   },
   dayLabel: {
-      fontSize: 27,
-      alignItems: "center",
-      textAlign: "center",
-      fontWeight: "normal",
-
+    fontSize: 27,
+    marginLeft: 15,
+    alignSelf: "stretch",
+    marginTop: "auto",
+    marginBottom: "auto",
   },
-  garageOption: {
-    width: Dimensions.get("window").width * 0.85,
-    height: 50,
-    marginTop: "5%",
-    
-  }, 
   garageLabel: {
-      fontSize: 24,
-      fontWeight: "normal",
-      marginTop: "auto",
-      marginBottom: "auto",
+    fontSize: 24,
+    fontWeight: "normal",
+    marginLeft: "auto",
+    marginRight: "auto",
+    alignSelf: "center",
   },
   otherLabel: {
-      fontSize: 20, 
-      fontWeight: "normal", 
-      alignItems: "center",
-      marginTop: "auto",
+    fontSize: 20,
+    fontWeight: "normal",
+    alignSelf: "stretch",
+    textAlign: "center",
   },
   downArrow: {
-      marginLeft: 10, 
-      marginRight: 10, 
-
-  }
+    marginLeft: 10,
+    marginRight: 10,
+  },
 });
 
 export default styles;
