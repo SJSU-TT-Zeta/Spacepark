@@ -5096,6 +5096,8 @@
     "brace-expansion" "^1.1.7"
 
 "minimatch@^5.0.1":
+  "integrity" "sha512-nLDxIFRyhDblz3qMuq+SoRZED4+miJ/G+tdDrjkkkRnjAsBexeGpgjLEQ0blJy7rHhR2b93rhQY4SvyWu9v03g=="
+  "resolved" "https://registry.npmjs.org/minimatch/-/minimatch-5.0.1.tgz"
   "version" "5.0.1"
   dependencies:
     "brace-expansion" "^2.0.1"

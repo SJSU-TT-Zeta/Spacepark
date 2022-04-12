@@ -20,34 +20,85 @@ import styles from "./styles";
 import logo from "../../assets/sp_logo.png";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
-import { LineChart } from "react-native-chart-kit";
+import { BarChart } from "react-native-chart-kit";
 
 import globalStyles from "../globalStyle";
-import { React, useRef, useState } from "react";
+import { React, useCallback, useRef, useState } from "react";
 
-const fakeData = {
-  monday: {
-    id: "monId",
+import WrappedBarChart from "../../components/BarChart";
+
+const fakeData = [
+  {
+    id: "id0",
+    spotsAvailable: 800,
   },
-};
+  {
+    id: "id1",
+    spotsAvailable: 700,
+  },
+  {
+    id: "id2",
+    spotsAvailable: 600,
+  },
+  {
+    id: "id3",
+    spotsAvailable: 500,
+  },
+  {
+    id: "id4",
+    spotsAvailable: 400,
+  },
+  {
+    id: "id5",
+    spotsAvailable: 300,
+  },
+  {
+    id: "id6",
+    spotsAvailable: 200,
+  },
+];
+
+const dates = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 const FrequencyNorthParking = (props) => {
-  const scrollX = useRef(new Animated.Value(0)).current;
-
-  const flatListRef = useRef();
+  const help = new Animated.Value(0);
+  const scrollX = useRef(help).current;
+  const flatListRef = useRef(null);
+  const [index, setIndex] = useState(0);
 
   const goToGarageView = () => {
     props.navigation.navigate("FrequencyView");
   };
 
-  const test = () => {
-    flatListRef.scrollToIndex({ index: "id2" });
+  const incrementChart = () => {
+    if (index < fakeData.length - 1) {
+      flatListRef.current.scrollToIndex({ index: index + 1 });
+      setIndex(index + 1);
+    }
+  };
+
+  const decrementChart = () => {
+    if (index > 0) {
+      flatListRef.current.scrollToIndex({ index: index - 1 });
+      setIndex(index - 1);
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={globalStyles.header}>
-        <TouchableOpacity style={globalStyles.backArrow} onPress={test}>
+        <TouchableOpacity
+          style={globalStyles.backArrow}
+          onPress={goToGarageView}
+        >
           <MaterialIcons name="arrow-back-ios" size={30} color="black" />
         </TouchableOpacity>
         <Image style={globalStyles.logo} source={logo} />
@@ -73,7 +124,7 @@ const FrequencyNorthParking = (props) => {
               textAlign: "center",
             }}
           >
-            Monday
+            {dates[index]}
           </Text>
           <View
             style={{
@@ -90,81 +141,31 @@ const FrequencyNorthParking = (props) => {
                 textAlign: "center",
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>800 </Text>
+              <Text style={{ fontWeight: "bold" }}>
+                {`${fakeData[index].spotsAvailable} `}{" "}
+              </Text>
               spots available
             </Text>
           </View>
         </View>
 
-        <View style={{ height: 300 }}>
+        <View style={{ height: 300, marginTop: 10 }}>
           <Animated.FlatList
-            red={(ref) => (flatListRef = ref)}
+            ref={flatListRef}
+            initialNumToRender={7}
             snapToAlignment="start"
             decelerationRate={"fast"}
             snapToInterval={Dimensions.get("window").width}
             horizontal
             pagingEnabled
-            scrollEnabled={true}
+            scrollEnabled={false}
             showsHorizontalScrollIndicator={false}
-            style={{ height: 300, backgroundColor: "grey" }}
-            data={[
-              {
-                id: "id1",
-                title: "Hello World",
-                color: "blue",
-              },
-              {
-                id: "id2",
-                title: "Hello World2",
-                color: "green",
-              },
-              {
-                id: "id3",
-                title: "Hello World3",
-                color: "red",
-              },
-              {
-                id: "id4",
-                title: "Hello World3",
-                color: "black",
-              },
-              {
-                id: "i54",
-                title: "Hello World3",
-                color: "red",
-              },
-              {
-                id: "id6",
-                title: "Hello World3",
-                color: "blue",
-              },
-              {
-                id: "id7",
-                title: "Hello World3",
-                color: "green",
-              },
-            ]}
-            renderItem={(item) => {
-              return (
-                <View
-                  style={{
-                    width: Dimensions.get("window").width,
-                    height: 300,
-                    backgroundColor: item.item.color,
-                  }}
-                >
-                  <Text
-                    style={{
-                      backgroundColor: "#fff",
-                      borderWidth: 1,
-                      width: "100%",
-                    }}
-                  >
-                    {item.item.title}
-                  </Text>
-                </View>
-              );
+            style={{
+              height: 300,
+              width: Dimensions.get("window").width,
             }}
+            data={fakeData}
+            renderItem={() => <WrappedBarChart />}
             keyExtractor={(item) => item.id}
             onScroll={Animated.event(
               [{ nativeEvent: { contentOffset: { x: scrollX } } }],
@@ -175,11 +176,8 @@ const FrequencyNorthParking = (props) => {
 
         <View
           style={{
-            // backgroundColor: "blue",
             width: "100%",
             marginTop: "2%",
-            // position: "absolute",
-            // bottom: "40%",
           }}
         >
           <RNAnimatedScrollIndicators
@@ -203,7 +201,7 @@ const FrequencyNorthParking = (props) => {
               marginLeft: "auto",
             }}
           >
-            <TouchableOpacity style={{}}>
+            <TouchableOpacity style={{}} onPress={decrementChart}>
               <Text>PREV</Text>
             </TouchableOpacity>
           </View>
@@ -214,7 +212,7 @@ const FrequencyNorthParking = (props) => {
               marginLeft: "auto",
             }}
           >
-            <TouchableOpacity style={{}}>
+            <TouchableOpacity style={{}} onPress={incrementChart}>
               <Text>NEXT</Text>
             </TouchableOpacity>
           </View>
