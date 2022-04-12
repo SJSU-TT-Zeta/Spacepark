@@ -10,6 +10,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import CircularProgress from "react-native-circular-progress-indicator";
 
+import RNAnimatedScrollIndicators from "react-native-animated-scroll-indicators";
+
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -30,6 +32,8 @@ const fakeData = {
 };
 
 const FrequencyNorthParking = (props) => {
+  const scrollX = useRef(new Animated.Value(0)).current;
+
   const flatListRef = useRef();
 
   const goToGarageView = () => {
@@ -39,8 +43,6 @@ const FrequencyNorthParking = (props) => {
   const test = () => {
     flatListRef.scrollToIndex({ index: "id2" });
   };
-
-  scrollToIndex = () => {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,50 +96,129 @@ const FrequencyNorthParking = (props) => {
           </View>
         </View>
 
-        <FlatList
-          red={(ref) => (flatListRef = ref)}
-          horizontal={true}
-          snapToAlignment="start"
-          decelerationRate={"fast"}
-          snapToInterval={Dimensions.get("window").width}
-          pagingEnabled
-          data={[
-            {
-              id: "id1",
-              title: "Hello World",
-              color: "blue",
-            },
-            {
-              id: "id2",
-              title: "Hello World2",
-              color: "green",
-            },
-            {
-              id: "id3",
-              title: "Hello World3",
-              color: "red",
-            },
-            {
-              id: "id4",
-              title: "Hello World3",
-              color: "black",
-            },
-          ]}
-          renderItem={(item) => {
-            return (
-              <View
-                style={{
-                  width: Dimensions.get("window").width,
-                  height: 100,
-                  backgroundColor: item.item.color,
-                }}
-              >
-                {item.title}
-              </View>
-            );
+        <View style={{ height: 300 }}>
+          <Animated.FlatList
+            red={(ref) => (flatListRef = ref)}
+            snapToAlignment="start"
+            decelerationRate={"fast"}
+            snapToInterval={Dimensions.get("window").width}
+            horizontal
+            pagingEnabled
+            scrollEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            style={{ height: 300, backgroundColor: "grey" }}
+            data={[
+              {
+                id: "id1",
+                title: "Hello World",
+                color: "blue",
+              },
+              {
+                id: "id2",
+                title: "Hello World2",
+                color: "green",
+              },
+              {
+                id: "id3",
+                title: "Hello World3",
+                color: "red",
+              },
+              {
+                id: "id4",
+                title: "Hello World3",
+                color: "black",
+              },
+              {
+                id: "i54",
+                title: "Hello World3",
+                color: "red",
+              },
+              {
+                id: "id6",
+                title: "Hello World3",
+                color: "blue",
+              },
+              {
+                id: "id7",
+                title: "Hello World3",
+                color: "green",
+              },
+            ]}
+            renderItem={(item) => {
+              return (
+                <View
+                  style={{
+                    width: Dimensions.get("window").width,
+                    height: 300,
+                    backgroundColor: item.item.color,
+                  }}
+                >
+                  <Text
+                    style={{
+                      backgroundColor: "#fff",
+                      borderWidth: 1,
+                      width: "100%",
+                    }}
+                  >
+                    {item.item.title}
+                  </Text>
+                </View>
+              );
+            }}
+            keyExtractor={(item) => item.id}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              { useNativeDriver: true }
+            )}
+          />
+        </View>
+
+        <View
+          style={{
+            // backgroundColor: "blue",
+            width: "100%",
+            marginTop: "2%",
+            // position: "absolute",
+            // bottom: "40%",
           }}
-          keyExtractor={(item) => item.id}
-        />
+        >
+          <RNAnimatedScrollIndicators
+            numberOfCards={7}
+            scrollWidth={Dimensions.get("window").width}
+            activeColor={"#00518F"}
+            inActiveColor={"#fab040"}
+            scrollAnimatedValue={scrollX}
+          />
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            width: Dimensions.get("window").width,
+          }}
+        >
+          <View
+            style={{
+              marginRight: "auto",
+              marginLeft: "auto",
+            }}
+          >
+            <TouchableOpacity style={{}}>
+              <Text>PREV</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{
+              marginRight: "auto",
+              marginLeft: "auto",
+            }}
+          >
+            <TouchableOpacity style={{}}>
+              <Text>NEXT</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
