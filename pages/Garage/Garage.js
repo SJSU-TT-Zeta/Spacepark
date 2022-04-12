@@ -75,7 +75,7 @@ const Garage = (props) => {
                   <Text>More Info</Text>
                 </TouchableOpacity>
                 <Text>
-                  <Text style={{ fontWeight: "bold" }}>37</Text>
+                  <Text style={{ fontWeight: "bold" }}>37 </Text>
                   spots available
                 </Text>
               </View>
@@ -84,7 +84,7 @@ const Garage = (props) => {
                 data={dummyData}
                 chartConfig={chartConfig}
                 width={200}
-                height={70}
+                height={60}
                 hidePointsAtIndex={[0, 1, 2, 3, 4, 5]}
                 segments={2}
                 withVerticalLabels={false}
@@ -124,7 +124,7 @@ const Garage = (props) => {
                   <Text>More Info</Text>
                 </TouchableOpacity>
                 <Text>
-                  <Text style={{ fontWeight: "bold" }}>37</Text>
+                  <Text style={{ fontWeight: "bold" }}>37 </Text>
                   spots available
                 </Text>
               </View>
@@ -157,7 +157,7 @@ const Garage = (props) => {
                   <Text>More Info</Text>
                 </TouchableOpacity>
                 <Text>
-                  <Text style={{ fontWeight: "bold" }}>37</Text>
+                  <Text style={{ fontWeight: "bold" }}>37 </Text>
                   spots available
                 </Text>
               </View>
