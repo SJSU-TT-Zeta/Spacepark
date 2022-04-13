@@ -9,9 +9,9 @@ const Stack = createStackNavigator();
 
 const GarageStackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Garage">
+    <Stack.Navigator initialRouteName="GarageView">
       <Stack.Screen
-        name="Garage"
+        name="GarageView"
         component={Garage}
         options={{ headerShown: false, gestureEnabled: false }}
       />

@@ -1,4 +1,4 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import {
   Ionicons,
   MaterialCommunityIcons,
@@ -9,65 +9,46 @@ import GarageStackNavigator from "./GarageNavigator";
 import ProfileStackNavigator from "./ProfileNavigator";
 import FrequencyStackNavigator from "./FrequencyNavigator";
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const BottomTab = () => {
   return (
     <Tab.Navigator
-      initialRouteName="GarageStack"
-      activeColor="#2C2C2C"
+      initialRouteName="Garage"
+      activeColor="#15AB69"
       inactiveColor="rgba(44,44,44,0.3)"
-      //   barStyle={{ backgroundColor: "white" }}
-      screenOptions={{
-        headerShown: false,
-      }}
+      shifting={true}
       backBehavior={"history"}
+      barStyle={{
+        backgroundColor: "#fff",
+      }}
     >
       <Tab.Screen
-        name="GarageStack"
+        name="Garage"
         component={GarageStackNavigator}
         options={{
           tabBarIcon: ({ color }) => {
             return (
-              <MaterialCommunityIcons
-                name="garage"
-                size={30}
-                color={color}
-                style={{ marginTop: 5 }}
-              />
+              <MaterialCommunityIcons name="garage" size={30} color={color} />
             );
           },
         }}
       />
       <Tab.Screen
-        name="FrequencyStack"
+        name="Frequency"
         component={FrequencyStackNavigator}
         options={{
           tabBarIcon: ({ color }) => {
-            return (
-              <Ionicons
-                name="bar-chart"
-                size={24}
-                color={color}
-                style={{ marginTop: 8 }}
-              />
-            );
+            return <Ionicons name="bar-chart" size={24} color={color} />;
           },
         }}
       />
       <Tab.Screen
-        name="ProfileStack"
+        name="Profile"
         component={ProfileStackNavigator}
         options={{
           tabBarIcon: ({ color }) => {
-            return (
-              <FontAwesome5
-                name="user-circle"
-                size={24}
-                color={color}
-                style={{ marginTop: 8 }}
-              />
-            );
+            return <FontAwesome5 name="user-circle" size={24} color={color} />;
           },
         }}
       />

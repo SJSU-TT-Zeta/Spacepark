@@ -3,7 +3,6 @@ import { View, Text, Image } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Ionicons } from "@expo/vector-icons";
 import logo from "../../assets/sp_logo.png";
 
 import styles from "./styles";
@@ -13,11 +12,11 @@ const Login = (props) => {
     // Check if user is logged in
   }, []);
 
-  const dummyLogin = () => {
-    props.navigation.navigate("Profile");
+  const psuedoLogin = () => {
+    props.navigation.navigate("ProfileView");
   };
 
-  const dummySignup = () => {
+  const psuedoSignup = () => {
     props.navigation.navigate("Signup");
   };
 
@@ -26,29 +25,44 @@ const Login = (props) => {
       <View style={styles.header}>
         <Image style={styles.logo} source={logo} />
       </View>
-      <Text style={styles.title}>Login</Text>
       <View style={styles.content}>
+        <Text style={styles.titleTwo}>Login</Text>
         <View style={styles.formItem}>
-          <Text style={styles.formText}>Username</Text>
-          <View>
+          <View style={styles.formItem1}>
+            <Text style={styles.formText}>Username</Text>
+          </View>
+          <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
-              placeholder={"Why hello there"}
+              placeholder={"Enter Username"}
             />
           </View>
         </View>
-        <View>
-          <Text style={styles.formText}>Password</Text>
-          <TextInput style={styles.formInput} placeholder={"Why hello there"} />
+        <View style={styles.formItem}>
+          <View style={styles.formItem1}>
+            <Text style={styles.formText}>Password</Text>
+          </View>
+          <View style={styles.formItem2}>
+            <TextInput
+              style={styles.formInput}
+              placeholder={"Enter Password"}
+            />
+          </View>
         </View>
-        <TouchableOpacity onPress={dummyLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+        <View style={styles.formItem}>
+          <View style={styles.formItem3}>
+            <View style={styles.buttonHelper}>
+              <TouchableOpacity onPress={psuedoLogin} style={styles.button}>
+                <Text style={styles.buttonLogin}>Login</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <Text style={styles.signQ}>Don't have an account yet?</Text>
+        <TouchableOpacity onPress={psuedoSignup}>
+          <Text style={styles.signUp}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.signQ}>Don't have an account yet?</Text>
-      <TouchableOpacity onPress={dummySignup}>
-        <Text style={styles.signUp}>Sign Up</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };
