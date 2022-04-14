@@ -55,9 +55,9 @@ const Garage = (props) => {
     setData(request);
   }, []);
 
-  const goToLoginView = () => {
+  const goToMoreInfo = () => {
     // console.log(props);
-    props.navigation.navigate("Login");
+    props.navigation.navigate("Info");
   };
 
   const refreshCharts = () => {};
@@ -94,7 +94,7 @@ const Garage = (props) => {
 
             <View style={styles.contentItemWrapWrap}>
               <View style={{ width: "100%" }}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={goToMoreInfo}>
                   <Text>More Info</Text>
                 </TouchableOpacity>
                 <Text
