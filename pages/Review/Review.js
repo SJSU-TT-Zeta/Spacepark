@@ -66,7 +66,7 @@ const Review = (props) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView>
       <View style={styles.header}>
         <MaterialIcons
           style={styles.arrow}

@@ -61,7 +61,10 @@ const styles = StyleSheet.create({
     height: 35,
     backgroundColor: "#15AB69",
     marginTop: "2.5%",
+<<<<<<< HEAD
     borderRadius: 5,
+=======
+>>>>>>> page for user reviews
   },
   submitTitle: {
     fontSize: 20,
