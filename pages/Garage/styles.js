@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: "column",
     alignItems: "center",
+    width: Dimensions.get("window").width,
   },
   contentItem: {
     backgroundColor: "white",
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
   },
-  contentItemWrapWrap: {
+  contentItemWrap2: {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
