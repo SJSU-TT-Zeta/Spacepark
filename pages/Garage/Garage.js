@@ -25,7 +25,7 @@ const dummyData = {
 const chartConfig = {
   backgroundGradientFromOpacity: 0,
   backgroundGradientToOpacity: 0,
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+  color: (opacity = 1) => `rgba(3, 232, 121, ${opacity})`,
   strokeWidth: 2, // optional, default 3
   barPercentage: 0.5,
 };
@@ -43,7 +43,7 @@ const Garage = (props) => {
         <MaterialIcons
           name="refresh"
           style={[styles.headerItem, styles.refresh]}
-          size={45}
+          size={40}
           color="#15AB69"
         />
       </View>
@@ -51,13 +51,13 @@ const Garage = (props) => {
       <View style={styles.content}>
         <Text style={styles.title}>Parking Garages</Text>
         <View style={styles.contentItem}>
-          <Text>SJSU North Parking Garage</Text>
+          <Text style={styles.subtitle}>SJSU North Parking Garage</Text>
 
           <View style={styles.contentItemWrap}>
             <View style={styles.circle}>
               <CircularProgress
                 value={60}
-                maxValue={200}
+                maxValue={100}
                 radius={60}
                 duration={1500}
                 activeStrokeWidth={12}
@@ -74,8 +74,8 @@ const Garage = (props) => {
                 <TouchableOpacity style={styles.button}>
                   <Text>More Info</Text>
                 </TouchableOpacity>
-                <Text>
-                  <Text style={{ fontWeight: "bold" }}>37</Text>
+                <Text >
+                  <Text style={{ fontWeight: "bold"}}>37 </Text>
                   spots available
                 </Text>
               </View>
@@ -100,22 +100,11 @@ const Garage = (props) => {
         </View>
 
         <View style={styles.contentItem}>
-          <Text>SJSU North Parking Garage</Text>
+          <Text style={styles.subtitle}>SJSU South Parking Garage</Text>
 
           <View style={styles.contentItemWrap}>
-            <View style={styles.circle}>
-              <CircularProgress
-                value={60}
-                maxValue={200}
-                radius={60}
-                duration={1500}
-                activeStrokeWidth={12}
-                inActiveStrokeWidth={12}
-                textStyle={styles.progressText}
-                title={"Full"}
-                titleStyle={styles.progressTitle}
-                valueSuffix={"%"}
-              />
+            <View style={styles.emptyCircle}>
+              <Text style={styles.comingSoon}> Coming Soon</Text>
             </View>
 
             <View style={styles.contentItemWrapWrap}>
@@ -124,31 +113,21 @@ const Garage = (props) => {
                   <Text>More Info</Text>
                 </TouchableOpacity>
                 <Text>
-                  <Text style={{ fontWeight: "bold" }}>37</Text>
+                  <Text style={{ fontWeight: "bold" }}>N/A </Text>
                   spots available
                 </Text>
               </View>
             </View>
+            
           </View>
         </View>
 
         <View style={styles.contentItem}>
-          <Text>SJSU North Parking Garage</Text>
+          <Text style={styles.subtitle}>SJSU West Parking Garage</Text>
 
           <View style={styles.contentItemWrap}>
-            <View style={styles.circle}>
-              <CircularProgress
-                value={60}
-                maxValue={200}
-                radius={60}
-                duration={1500}
-                activeStrokeWidth={12}
-                inActiveStrokeWidth={12}
-                textStyle={styles.progressText}
-                title={"Full"}
-                titleStyle={styles.progressTitle}
-                valueSuffix={"%"}
-              />
+            <View style={styles.emptyCircle}>
+              <Text style={styles.comingSoon}> Coming Soon</Text>
             </View>
 
             <View style={styles.contentItemWrapWrap}>
@@ -156,15 +135,17 @@ const Garage = (props) => {
                 <TouchableOpacity style={styles.button}>
                   <Text>More Info</Text>
                 </TouchableOpacity>
-                <Text>
-                  <Text style={{ fontWeight: "bold" }}>37</Text>
+                <Text style={styles.spotsAvail}>
+                  <Text style={{ fontWeight: "bold"}}>N/A </Text>
                   spots available
                 </Text>
               </View>
             </View>
+            
           </View>
         </View>
       </View>
+      <Text style={{fontWeight: "300", textAlign: "right", marginRight: "2%"}}>Last updated 5 seconds ago...</Text>
     </SafeAreaView>
   );
 };
