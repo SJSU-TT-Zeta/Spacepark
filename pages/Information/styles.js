@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 15,
     width: "85%",
-    height: "27%", // change if needed
+    height: "50%", // change if needed
     marginTop: "5%",
   },
   scrollView: {
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
     marginHorizontal: 20,
   },
 });
