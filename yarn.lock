@@ -1154,8 +1154,6 @@
   "resolved" "https://registry.npmjs.org/@expo/config/-/config-6.0.6.tgz"
   "version" "6.0.6"
   dependencies:
-    "@babel/code-frame" "~7.10.4"
-    "@expo/config-plugins" "4.0.6"
     "@expo/config-types" "^43.0.1"
     "@expo/json-file" "8.2.33"
     "getenv" "^1.0.0"
