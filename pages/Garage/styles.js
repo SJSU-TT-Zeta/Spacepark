@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F7F8FA",
+    height: "100%",
   },
   header: {
     height: 60,
@@ -40,23 +41,32 @@ const styles = StyleSheet.create({
   contentItem: {
     backgroundColor: "white",
     borderRadius: 15,
-    width: "85%",
-    height: "27%", // change if needed
-    marginTop: "5%",
+    width: "90%",
+    marginTop: 15,
+    elevation: 1,
   },
   circle: {
     width: 120,
+    alignItems: "center",
+    justifyContent: "center",
   },
   contentItemWrap: {
     flexDirection: "row",
-    marginTop: 10,
-    marginLeft: 10,
+    width: "100%",
   },
   contentItemWrapWrap: {
     flexDirection: "column",
-    marginTop: 10,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    width: Dimensions.get("window").width * 0.9 - 120,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  emptyCircleWrap: {
+    width: 120,
+    height: 120,
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     width: 90,
@@ -66,7 +76,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 5,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   spotsAvail: {
     textAlign: "center",
@@ -78,16 +88,22 @@ const styles = StyleSheet.create({
     color: "#252629",
   },
   emptyCircle: {
-    width: 108,
-    height: 108,
-    borderRadius: 120 / 2,
-    backgroundColor: 'transparent',
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+    backgroundColor: "transparent",
     borderColor: "#B7B7B7",
     borderWidth: 10,
-    marginRight: 10,
-    justifyContent: "center"
-  }
-  
+    justifyContent: "center",
+  },
 });
 
-export default styles;
+const chartConfig = {
+  backgroundGradientFromOpacity: 0,
+  backgroundGradientToOpacity: 0,
+  color: (opacity = 1) => `rgba(21, 171, 105, ${opacity})`,
+  strokeWidth: 2, // optional, default 3
+  barPercentage: 0.5,
+};
+
+export { styles, chartConfig };
