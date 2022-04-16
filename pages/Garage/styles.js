@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     width: 90,
     height: 30,
     borderRadius: 10,
-    borderWidth: 1,
+    borderWidth: 0.5,
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 5,
