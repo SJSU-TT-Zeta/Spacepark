@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
     backgroundColor: "#F7F8FA",
     flexDirection: "column",
     alignItems: "center",

@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native-gesture-handler";
+import { Dimensions } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 import logo from "../../assets/sp_logo.png";
@@ -16,6 +17,10 @@ const Info = (props) => {
     props.navigation.navigate("GarageView");
   };
 
+  const goToReviews = () => {
+    props.navigation.navigate("Review");
+  };
+
   const goToNorthFrequency = () => {
     console.log(props);
     props.navigation.navigate("Frequency", { screen: "FrequencyNorthParking" });
@@ -24,9 +29,7 @@ const Info = (props) => {
   return (
     <View styles={{ flex: 1 }}>
       <ScrollView
-        style={{
-          width: "100%",
-        }}
+        style={{ height: Dimensions.get("window").height }}
         contentContainerStyle={styles.container}
       >
         <View style={styles.header}>
@@ -45,7 +48,7 @@ const Info = (props) => {
             >
               <Text style={styles.buttonText}>Charts</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={psuedoHome}>
+            <TouchableOpacity style={styles.button} onPress={goToReviews}>
               <Text style={styles.buttonText}>Reviews</Text>
             </TouchableOpacity>
           </View>
