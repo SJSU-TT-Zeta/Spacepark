@@ -3,7 +3,6 @@ import { StyleSheet, Dimensions } from "react-native";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F7F8FA",
-    height: "100%",
     flexDirection: "column",
     alignItems: "center",
   },
@@ -43,12 +42,18 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 15,
     width: "85%",
-    height: "50%", // change if needed
     marginTop: "5%",
+    padding: 10,
+    flexDirection: "column",
+    alignItems: "center",
   },
   scrollView: {
     backgroundColor: "pink",
     marginHorizontal: 20,
+  },
+  contentItemTitle: {
+    fontSize: 25,
+    alignSelf: "center",
   },
 });
 
