@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     //height: 20,
     borderRadius: 10,
     borderWidth: 0.5,
+    borderColor: "#15AB69",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -38,10 +39,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 10,
     marginRight: 10,
+    marginTop: 10,
   },
   contentItem: {
     backgroundColor: "white",
     borderRadius: 15,
+    borderWidth: 0.5,
+    borderColor: "#15AB69",
     width: "85%",
     marginTop: "5%",
     padding: 10,
@@ -55,6 +59,15 @@ const styles = StyleSheet.create({
   contentItemTitle: {
     fontSize: 25,
     alignSelf: "center",
+  },
+  contentText: {
+    fontWeight: "bold",
+    marginTop: 10,
+    fontSize: 18,
+  },
+  contentText2: {
+    marginTop: 10,
+    fontSize: 18,
   },
 });
 
