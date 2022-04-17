@@ -85,9 +85,6 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     textAlign: "center",
   },
-  starDisplay: {
-    //width: Dimensions.get("window").width * 0.35,
-  },
   reviewHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
