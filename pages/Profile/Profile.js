@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { auth } from "../../api/api-config";
+import { getUser } from "../../api/User/user-auth";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import logo from "../../assets/sp_logo.png";
@@ -10,22 +13,30 @@ import ProfileIcon from "../../assets/images/profile1.svg";
 
 import styles from "./styles";
 
-const psuedoData = {
-  username: "Erica_Xue",
-  email: "erica.xue@sjsu.edu",
+const userObject = {
+  username: "Sign Up Today!",
+  email: "",
 };
 
 const Profile = (props) => {
+  const [user, setUser] = useState(userObject);
+  
   useEffect(() => {
-    // Check if user is logged in
+    if(auth.currentUser) {
+      const user = getUser(auth.currentUser.uid);
+      if(user) {
+        setUser(user);
+      } else {
+        setUser(userObject);
+      }
+    } else {
+      setUser(userObject);
+    }
   }, []);
 
-  const psuedoLogout = () => {
+  const logout = () => {
+    auth.signOut();
     props.navigation.navigate("Login");
-  };
-
-  const psuedoSignup = () => {
-    props.navigation.navigate("Signup");
   };
 
   return (
@@ -35,14 +46,14 @@ const Profile = (props) => {
       </View>
 
       <View style={styles.profileWrap}>
-        <Text style={styles.title}>Hello Erica_Xue!</Text>
+        <Text style={styles.title}>Hello {user.username}</Text>
         <ProfileIcon width={155} height={155} color={"#2E2E2E"} />
-        <Text style={styles.text}>Erica_Xue</Text>
-        <Text style={styles.text}>erica.xue@sjsu.edu</Text>
+        <Text style={styles.text}>{user.username}</Text>
+        <Text style={styles.text}>{user.email}</Text>
       </View>
 
       <View style={styles.logout}>
-        <TouchableOpacity onPress={psuedoLogout} style={styles.logoutWrap}>
+        <TouchableOpacity onPress={logout} style={styles.logoutWrap}>
           <Text style={styles.logText}>Logout</Text>
           <MaterialIcons
             style={styles.logIcon}
@@ -54,8 +65,8 @@ const Profile = (props) => {
       </View>
 
       <View style={styles.delete}>
-        <TouchableOpacity onPress={psuedoSignup} style={styles.del}>
-          <Text style={styles.delText}>Delete Account</Text>
+        <TouchableOpacity onPress={logout} style={styles.del}>
+          <Text style={styles.delText}>Login</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

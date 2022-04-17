@@ -3,13 +3,22 @@ import { View, Text, Image } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { auth } from "../../api/api-config";
+import { getUser } from "../../api/User/user-auth";
+
 import logo from "../../assets/sp_logo.png";
 
 import styles from "./styles";
 
 const Login = (props) => {
+
   useEffect(() => {
-    // Check if user is logged in
+    if(auth.currentUser) {
+      const user = getUser(auth.currentUser.uid);
+      if(user) {
+        props.navigation.navigate("ProfileView");
+      }
+    }
   }, []);
 
   const psuedoLogin = () => {

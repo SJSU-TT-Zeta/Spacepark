@@ -1,4 +1,19 @@
-import {firestore} from "../api-config";
+import {firestore, auth} from "../api-config";
+
+export const getUser = async (uid) => {
+    if (!uid) {
+        return null;
+    }
+
+    const userData = firestore.doc(`user/${uid}`);
+    const getUser = await userData.get();
+
+    if (getUser.exists) {
+        return getUser.data();
+    }
+
+    return null;
+}
 
 export const userProfileDocument = async (user, info) => {
     
@@ -12,11 +27,13 @@ export const userProfileDocument = async (user, info) => {
     if (!getUser.exists) {
         const { username, email } = user;
         const createdAt = new Date();
+        const reviews = [];
         try {
             await userData.set({
                 username,
                 email,
                 createdAt,
+                reviews,
                 ...info
             })
         } catch (error) {
