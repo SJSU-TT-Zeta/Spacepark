@@ -6,7 +6,6 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import { Dimensions } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 import logo from "../../assets/sp_logo.png";
@@ -27,9 +26,17 @@ const Info = (props) => {
   };
 
   return (
-    <View styles={{ flex: 1 }}>
+    <View
+      styles={{
+        backgroundColor: "green",
+        height: Dimensions.get("window").height,
+      }}
+    >
       <ScrollView
-        style={{ height: Dimensions.get("window").height }}
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
         contentContainerStyle={styles.container}
       >
         <View style={styles.header}>
@@ -54,34 +61,27 @@ const Info = (props) => {
           </View>
         </View>
 
-        <View
-          style={{
-            backgroundColor: "white",
-            borderRadius: 15,
-            width: "85%",
-            marginTop: "5%",
-            padding: 10,
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.contentItem}>
           <Text style={styles.contentItemTitle}>Total parking spots</Text>
           <View style={{ width: "80%" }}>
             <Text style={{ marginTop: 5, fontSize: 18 }}>
-              General ----------{" "}
+              General -----------------{" "}
               <Text style={{ fontWeight: "bold" }}> 1,445</Text>
             </Text>
             <Text style={{ marginTop: 5, fontSize: 18 }}>
-              Disabled --------- <Text style={{ fontWeight: "bold" }}>8 </Text>
+              Disabled ----------------{" "}
+              <Text style={{ fontWeight: "bold" }}>8 </Text>
             </Text>
             <Text style={{ marginTop: 5, fontSize: 18 }}>
-              Employee -------- <Text style={{ fontWeight: "bold" }}>335</Text>
+              Employee ---------------{" "}
+              <Text style={{ fontWeight: "bold" }}>335</Text>
             </Text>
             <Text style={{ marginTop: 5, fontSize: 18 }}>
-              R-Permit --------- <Text style={{ fontWeight: "bold" }}>7</Text>
+              R-Permit ----------------{" "}
+              <Text style={{ fontWeight: "bold" }}>7</Text>
             </Text>
             <Text style={{ marginTop: 5, fontSize: 18 }}>
-              30-Min Time Zone --------{" "}
+              30-Min Time Zone ------{" "}
               <Text style={{ fontWeight: "bold" }}>22</Text>
             </Text>
           </View>
@@ -90,54 +90,37 @@ const Info = (props) => {
         <View style={styles.contentItem}>
           <Text style={styles.contentItemTitle}>Pricing</Text>
           <View style={{ width: "80%" }}>
-            <Text style={{ fontWeight: "bold", marginTop: 5, fontSize: 18 }}>
-              Mon - Fri
+            <Text style={styles.contentText}>Mon - Fri</Text>
+            <Text style={styles.contentText2}>
+              30 Mins ---------------- $1.00
             </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
-              30 Mins --------- $1.00
+            <Text style={styles.contentText2}>
+              24 Hours --------------- $8.00
             </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
-              24 Hours --------- $8.00
+            <Text style={styles.contentText2}>
+              After 5:30 PM ---------- $5.00
             </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
-              After 5:30 PM ------ $5.00
+            <Text style={styles.contentText}>Sat - Sun</Text>
+            <Text style={styles.contentText2}>
+              24 Hours --------------- $5.00
             </Text>
-            <Text style={{ fontWeight: "bold", marginTop: 5, fontSize: 18 }}>
-              Sat - Sun
-            </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
-              24 Hours --------- $5.00
-            </Text>
-            <Text style={{ fontWeight: "bold", marginTop: 5, fontSize: 18 }}>
-              No Change & Refund
-            </Text>
+            <Text style={styles.contentText}>No Change & Refund</Text>
           </View>
         </View>
 
         <View style={[styles.contentItem, { marginBottom: 20 }]}>
           <Text style={styles.contentItemTitle}>Hours</Text>
           <View style={{ width: "80%" }}>
-            <Text style={{ fontWeight: "bold", marginTop: 5, fontSize: 18 }}>
-              Mon - Fri
-            </Text>
-            <Text style={{ fontWeight: "bold", marginTop: 5, fontSize: 18 }}>
-              Open 6:00 Am - 1:00 AM
-            </Text>
-            <Text style={{ fontWeight: "bold", marginTop: 5, fontSize: 18 }}>
+            <Text style={styles.contentText}>Mon - Fri</Text>
+            <Text style={styles.contentText}>Open 6:00 Am - 1:00 AM</Text>
+            <Text style={styles.contentText}>
               'E', 'R', 'H', Carpool, Overnight
             </Text>
-            <Text style={{ fontWeight: "bold", marginTop: 5, fontSize: 18 }}>
-              Permits
-            </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>Open 24 Hours</Text>
-            <Text style={{ fontWeight: "bold", marginTop: 5, fontSize: 18 }}>
-              Pay Method
-            </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
-              {" "}
-              1. ParkMobile App
-            </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
+            <Text style={styles.contentText}>Permits</Text>
+            <Text style={styles.contentText2}>Open 24 Hours</Text>
+            <Text style={styles.contentText}>Pay Method</Text>
+            <Text style={styles.contentText2}> 1. ParkMobile App</Text>
+            <Text style={styles.contentText2}>
               {" "}
               2. Pay Station on Each Parking Level
             </Text>
