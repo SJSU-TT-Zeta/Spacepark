@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { auth } from "../../api/api-config";
-import { getUser } from "../../api/User/user-auth";
+import { getUser, userSignIn } from "../../api/User/user-auth";
 
 import logo from "../../assets/sp_logo.png";
 
@@ -12,22 +12,33 @@ import styles from "./styles";
 
 const Login = (props) => {
 
-  useEffect(() => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(async () => {
     if(auth.currentUser) {
-      const user = getUser(auth.currentUser.uid);
+      const user = await getUser(auth.currentUser.uid);
       if(user) {
         props.navigation.navigate("ProfileView");
       }
     }
   }, []);
 
-  const psuedoLogin = () => {
-    props.navigation.navigate("ProfileView");
-  };
-
   const psuedoSignup = () => {
     props.navigation.navigate("Signup");
   };
+
+  const onEmailChange = (value) => {
+    setEmail(value);
+  }
+
+  const onPasswordChange = (value) => {
+    setPassword(value)
+  }
+
+  const onSubmit = async () => {
+    await userSignIn(email, password);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,12 +49,13 @@ const Login = (props) => {
         <Text style={styles.titleTwo}>Login</Text>
         <View style={styles.formItem}>
           <View style={styles.formItem1}>
-            <Text style={styles.formText}>Username</Text>
+            <Text style={styles.formText}>Email</Text>
           </View>
           <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
-              placeholder={"Enter Username"}
+              onChangeText={onEmailChange}
+              placeholder={"Enter Email"}
             />
           </View>
         </View>
@@ -54,6 +66,7 @@ const Login = (props) => {
           <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
+              onChangeText={onPasswordChange}
               placeholder={"Enter Password"}
             />
           </View>
@@ -61,7 +74,7 @@ const Login = (props) => {
         <View style={styles.formItem}>
           <View style={styles.formItem3}>
             <View style={styles.buttonHelper}>
-              <TouchableOpacity onPress={psuedoLogin} style={styles.button}>
+              <TouchableOpacity onPress={onSubmit} style={styles.button}>
                 <Text style={styles.buttonLogin}>Login</Text>
               </TouchableOpacity>
             </View>

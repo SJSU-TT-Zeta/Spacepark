@@ -1,12 +1,14 @@
-import {firestore, auth} from "../api-config";
+import { db, auth } from "../api-config";
+import { getDoc, setDoc, doc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 export const getUser = async (uid) => {
     if (!uid) {
         return null;
     }
 
-    const userData = firestore.doc(`user/${uid}`);
-    const getUser = await userData.get();
+    const userData = doc(db, "user", uid);
+    const getUser = await getDoc(userData);
 
     if (getUser.exists) {
         return getUser.data();
@@ -15,43 +17,41 @@ export const getUser = async (uid) => {
     return null;
 }
 
-export const userProfileDocument = async (user, info) => {
+export const userProfileDocument = async (user, theUsername) => {
     
     if (!user) {
         return;
     }
 
-    const userData = firestore.doc(`user/${user.uid}`);
-    const getUser = await userData.get();
-
-    if (!getUser.exists) {
-        const { username, email } = user;
-        const createdAt = new Date();
-        const reviews = [];
-        try {
-            await userData.set({
-                username,
-                email,
-                createdAt,
-                reviews,
-                ...info
-            })
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    return userData;
-
-}
-
-export const userSignIn = async (username, password) => {
+    const userData = doc(db, "user", user.uid);
     
+    const dateCreatedAt = new Date();
+    const theReviews = [];
     try {
-        await auth.signInWithEmailAndPassword(username, password);
+        await setDoc(userData, {
+            username: theUsername,
+            email: user.email,
+            createdAt: dateCreatedAt,
+            reviews: theReviews,
+        })
     } catch (error) {
         console.error(error);
     }
+    
+    const getUser = await getDoc(userData);
+
+    return getUser.data();
+
+}
+
+export const userSignIn = async (email, password) => {
+    
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+        return false;
+    }
+    return true;
 
 }
 
@@ -63,10 +63,12 @@ export const createUserAccount = async (email, username, password, confirmPasswo
     }
 
     try {
-        const { user } = await auth.createUserWithEmailAndPassword(email, password);
-        await userProfileDocument(user, {username});
+        const newAccount = await createUserWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password);
+        return await userProfileDocument(newAccount.user, username);
     } catch (error) {
         console.error(error);
     }
 
+    return;
 }
