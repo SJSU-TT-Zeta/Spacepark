@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { auth } from "../../api/api-config";
-import { getUser } from "../../api/User/user-auth";
+import { getUser, createUserAccount } from "../../api/User/user-auth";
 
 import { Ionicons } from "@expo/vector-icons";
 import logo from "../../assets/sp_logo.png";
@@ -12,6 +12,11 @@ import logo from "../../assets/sp_logo.png";
 import styles from "./styles";
 
 const Login = (props) => {
+
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
     if(auth.currentUser) {
@@ -22,13 +27,29 @@ const Login = (props) => {
     }
   }, []);
 
-  const psuedoLogin = () => {
-    props.navigation.navigate("ProfileView");
-  };
-
   const psuedoSignup = () => {
     props.navigation.navigate("ProfileView");
   };
+
+  const onEmailChange = (value) => {
+    setEmail(value);
+  }
+
+  const onUsernameChange = (value) => {
+    setUsername(value)
+  }
+
+  const onPasswordChange = (value) => {
+    setPassword(value)
+  }
+
+  const onConfirmPasswordChange = (value) => {
+    setConfirmPassword(value)
+  }
+
+  const onSubmit = async () => {
+    await createUserAccount(email, username, password, confirmPassword);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -45,7 +66,11 @@ const Login = (props) => {
             <Text style={styles.formText}>Email</Text>
           </View>
           <View style={styles.formItem2}>
-            <TextInput style={styles.formInput} placeholder={"Enter Email"} />
+            <TextInput 
+              style={styles.formInput}
+              onChangeText={onEmailChange} 
+              placeholder={"Enter Email"} 
+            />
           </View>
         </View>
         <View style={styles.formItem}>
@@ -55,6 +80,7 @@ const Login = (props) => {
           <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
+              onChangeText={onUsernameChange} 
               placeholder={"Enter Username"}
             />
           </View>
@@ -66,6 +92,7 @@ const Login = (props) => {
           <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
+              onChangeText={onPasswordChange} 
               placeholder={"Enter Password"}
             />
           </View>
@@ -77,6 +104,7 @@ const Login = (props) => {
           <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
+              onChangeText={onConfirmPasswordChange} 
               placeholder={"Re-enter Password"}
             />
           </View>
@@ -85,7 +113,7 @@ const Login = (props) => {
           <View style={styles.formItem3}>
             <View style={styles.buttonHelper}>
               <TouchableOpacity
-                onPress={psuedoSignup}
+                onPress={onSubmit}
                 style={styles.buttonSign}
               >
                 <Text style={styles.buttonText1}>Sign Up</Text>
