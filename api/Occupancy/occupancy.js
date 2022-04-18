@@ -23,12 +23,14 @@ export const garageOccupancyByName = async (garageName) => {
         return 0;
     }
 
-   const garageData = query(collection(db, "garage"), where("name", "==", garageName));
-   const getOccupancy = await getDocs(garageData);
-   let garage = null;
-   getOccupancy.forEach((doc) => {
-    garage = doc;
-   }); 
+    const garageData = query(collection(db, "garage"), where("name", "==", garageName));
+    const getOccupancy = await getDocs(garageData);
+    
+    let garage = 0;
+    getOccupancy.forEach((doc) => {
+        garage = doc.data().occupancy;
+    });
+    
+    return garage;
 
-   return garage ? garage.data().occupancy : 0;
 }
