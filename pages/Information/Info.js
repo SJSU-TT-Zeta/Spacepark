@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, Dimensions } from "react-native";
+import { View, Text, Image, Dimensions, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   ScrollView,
@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 
+import Constants from "expo-constants";
 import { Ionicons } from "@expo/vector-icons";
 import logo from "../../assets/sp_logo.png";
 import styles from "./styles";
+import { StatusBar } from "expo-status-bar";
 
 const Info = (props) => {
   const psuedoHome = () => {
@@ -26,18 +28,24 @@ const Info = (props) => {
   };
 
   return (
-    <View
-      styles={{
-        backgroundColor: "green",
-        height: Dimensions.get("window").height,
-      }}
-    >
+    <View style={{ backgroundColor: "#F7F8FA" }}>
+      {Platform.OS == "ios" ? (
+        <View
+          style={{
+            height: Constants.statusBarHeight,
+            backgroundColor: "#F7F8FA",
+          }}
+        />
+      ) : (
+        <></>
+      )}
+
       <ScrollView
         style={{
           width: "100%",
-          height: "100%",
         }}
         contentContainerStyle={styles.container}
+        bounces={false}
       >
         <View style={styles.header}>
           <TouchableOpacity onPress={psuedoHome} style={styles.back}>
@@ -48,7 +56,13 @@ const Info = (props) => {
 
         <View style={styles.content}>
           <Text style={styles.title}>SJSU North Parking Garage</Text>
-          <View style={{ flexDirection: "row" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              width: "70%",
+              justifyContent: "space-between",
+            }}
+          >
             <TouchableOpacity
               style={styles.button}
               onPress={goToNorthFrequency}

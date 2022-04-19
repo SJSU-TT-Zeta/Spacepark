@@ -1,4 +1,11 @@
-import { Button, Text, View, Image, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  Dimensions,
+  Platform,
+  ScrollView,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CircularProgress from "react-native-circular-progress-indicator";
 
@@ -11,7 +18,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { LineChart } from "react-native-chart-kit";
 import { useEffect, useState } from "react";
-import { set } from "react-native-reanimated";
+
+import StarRating from "react-native-star-rating";
 
 const initData = [
   {
@@ -37,14 +45,14 @@ const Garage = (props) => {
 
     const request = [
       {
-        capacity: 500,
+        capacity: 200,
         total: 800,
       },
       {
-        labels: ["0", "1", "2", "3", "4", "5", "6"],
+        labels: ["8am", "", "", "11am", "", "", "2pm"],
         datasets: [
           {
-            data: [0.2, 0.4, 0.28, 0.8, 0.99, 0.43],
+            data: [2, 4, 28, 8, 99, 43, 2],
             color: () => `#15AB69`,
             strokeWidth: 2,
           },
@@ -56,98 +64,158 @@ const Garage = (props) => {
   }, []);
 
   const goToMoreInfo = () => {
-    // console.log(props);
     props.navigation.navigate("Info");
   };
 
   const refreshCharts = () => {};
 
+  const goToNorthFrequency = () => {
+    props.navigation.navigate("Frequency", {
+      screen: "FrequencyNorthParking",
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Image style={[styles.headerItem, styles.logo]} source={logo} />
-        <TouchableOpacity style={styles.headerItem} onPress={refreshCharts}>
-          <MaterialIcons name="refresh" size={40} color="#15AB69" />
-        </TouchableOpacity>
-      </View>
+      {Platform.OS == "ios" ? (
+        <View
+          style={{
+            height: Constants.statusBarHeight,
+            backgroundColor: "#F7F8FA",
+          }}
+        />
+      ) : (
+        <></>
+      )}
 
-      <View style={styles.content}>
-        <Text style={styles.title}>Parking Garages</Text>
-        <View style={styles.contentItem}>
-          <Text style={styles.subtitle}>SJSU North Parking Garage</Text>
+      <ScrollView>
+        <View style={styles.header}>
+          <Image style={[styles.headerItem, styles.logo]} source={logo} />
+          <Text style={styles.title}>Parking Garages</Text>
+          <TouchableOpacity style={styles.headerItem} onPress={refreshCharts}>
+            <MaterialIcons name="refresh" size={35} color="#15AB69" />
+          </TouchableOpacity>
+        </View>
 
-          <View style={styles.contentItemWrap}>
-            <View style={styles.circle}>
-              <CircularProgress
-                value={(data[0].capacity / data[0].total) * 100}
-                maxValue={100}
-                radius={60}
-                duration={1500}
-                activeStrokeWidth={12}
-                inActiveStrokeWidth={12}
-                textStyle={styles.progressText}
-                title={"Full"}
-                titleStyle={styles.progressTitle}
-                valueSuffix={"%"}
-              />
-            </View>
+        <View style={styles.content}>
+          <View style={styles.contentItem}>
+            <Text style={styles.subtitle}>SJSU North Parking Garage</Text>
 
-            <View style={styles.contentItemWrapWrap}>
-              <View style={{ width: "100%" }}>
+            <View style={styles.contentItemWrap}>
+              <View style={styles.circle}>
+                <CircularProgress
+                  value={(data[0].capacity / data[0].total) * 100}
+                  maxValue={100}
+                  radius={60}
+                  duration={1500}
+                  activeStrokeWidth={12}
+                  inActiveStrokeWidth={12}
+                  textStyle={styles.progressText}
+                  title={"Full"}
+                  titleStyle={styles.progressTitle}
+                  valueSuffix={"%"}
+                />
+                <StarRating
+                  disabled={true}
+                  maxStars={5}
+                  fullStarColor="#ebdf3b"
+                  rating={3.5}
+                  starSize={20}
+                />
+              </View>
+
+              <View style={styles.contentItemWrapWrap}>
                 <TouchableOpacity style={styles.button} onPress={goToMoreInfo}>
-                  <Text>More Info</Text>
+                  <Text style={styles.textNorm}>More Info</Text>
                 </TouchableOpacity>
-                <Text
-                  style={{
-                    alignSelf: "stretch",
-                    textAlign: "center",
-                  }}
-                >
+                <Text style={[styles.textForeignFix, styles.textNorm]}>
                   <Text style={{ fontWeight: "bold" }}>{`${
                     data[0].total - data[0].capacity
                   } `}</Text>
                   spots available
                 </Text>
-              </View>
 
-              <LineChart
-                data={data[1]}
-                chartConfig={chartConfig}
-                width={Dimensions.get("window").width * 0.9 - 140}
-                height={80}
-                hidePointsAtIndex={[...data[1].datasets[0].data.keys()]}
-                segments={2}
-                withVerticalLabels={false}
-                withVerticalLines={false}
-                withShadow={false}
-                fromZero={true}
-                bezier
-              />
+                <TouchableOpacity onPress={goToNorthFrequency}>
+                  <LineChart
+                    data={data[1]}
+                    chartConfig={chartConfig}
+                    width={Dimensions.get("window").width * 0.9 - 140}
+                    height={170}
+                    // hidePointsAtIndex={[...data[1].datasets[0].data.keys()]}
+                    segments={2}
+                    withVerticalLabels={true}
+                    withVerticalLines={true}
+                    yAxisSuffix={"%"}
+                    withShadow={false}
+                    fromZero={true}
+                    bezier
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.contentItem}>
-          <Text style={styles.subtitle}>SJSU South Parking Garage</Text>
+          <View style={styles.contentItem}>
+            <Text style={styles.subtitle}>SJSU South Parking Garage</Text>
 
-          <View style={styles.contentItemWrap}>
-            <View style={styles.emptyCircleWrap}>
-              <View style={styles.emptyCircle}>
-                <Text style={styles.comingSoon}>Coming Soon</Text>
+            <View style={styles.contentItemWrap}>
+              <View style={styles.emptyCircleWrap}>
+                <View style={styles.emptyCircle}>
+                  <Text style={styles.comingSoon}>Coming Soon</Text>
+                </View>
+                <StarRating
+                  disabled={true}
+                  maxStars={5}
+                  fullStarColor="#ebdf3b"
+                  rating={0.5}
+                  starSize={20}
+                />
+              </View>
+
+              <View style={styles.contentItemWrapWrap}>
+                <TouchableOpacity
+                  disabled={true}
+                  style={[styles.button, styles.deactive]}
+                >
+                  <Text style={[styles.deactive, styles.textNorm]}>
+                    More Info
+                  </Text>
+                </TouchableOpacity>
+                <Text style={[styles.textForeignFix, styles.textNorm]}>
+                  <Text style={{ fontWeight: "bold" }}>N/A </Text>
+                  spots available
+                </Text>
               </View>
             </View>
+          </View>
 
-            <View style={styles.contentItemWrapWrap}>
-              <View style={{ width: "100%" }}>
-                <TouchableOpacity style={styles.button}>
-                  <Text>More Info</Text>
-                </TouchableOpacity>
-                <Text
-                  style={{
-                    alignSelf: "stretch",
-                    textAlign: "center",
-                  }}
+          <View style={styles.contentItem}>
+            <Text style={styles.subtitle}>SJSU West Parking Garage</Text>
+
+            <View style={styles.contentItemWrap}>
+              <View style={styles.emptyCircleWrap}>
+                <View style={styles.emptyCircle}>
+                  <Text style={styles.comingSoon}>Coming Soon</Text>
+                </View>
+                <StarRating
+                  disabled={true}
+                  maxStars={5}
+                  fullStarColor="#ebdf3b"
+                  rating={4}
+                  starSize={20}
+                />
+              </View>
+
+              <View style={styles.contentItemWrapWrap}>
+                <TouchableOpacity
+                  disabled={true}
+                  style={[styles.button, styles.deactive]}
                 >
+                  <Text style={[styles.deactive, styles.textNorm]}>
+                    More Info
+                  </Text>
+                </TouchableOpacity>
+                <Text style={[styles.textForeignFix, styles.textNorm]}>
                   <Text style={{ fontWeight: "bold" }}>N/A </Text>
                   spots available
                 </Text>
@@ -155,36 +223,7 @@ const Garage = (props) => {
             </View>
           </View>
         </View>
-
-        <View style={styles.contentItem}>
-          <Text style={styles.subtitle}>SJSU West Parking Garage</Text>
-
-          <View style={styles.contentItemWrap}>
-            <View style={styles.emptyCircleWrap}>
-              <View style={styles.emptyCircle}>
-                <Text style={styles.comingSoon}>Coming Soon</Text>
-              </View>
-            </View>
-
-            <View style={styles.contentItemWrapWrap}>
-              <View style={{ width: "100%" }}>
-                <TouchableOpacity style={styles.button}>
-                  <Text>More Info</Text>
-                </TouchableOpacity>
-                <Text
-                  style={{
-                    alignSelf: "stretch",
-                    textAlign: "center",
-                  }}
-                >
-                  <Text style={{ fontWeight: "bold" }}>N/A </Text>
-                  spots available
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: "column",
     alignItems: "center",
+    width: "100%",
   },
   title: {
     fontSize: 30,
@@ -29,17 +30,20 @@ const styles = StyleSheet.create({
   button: {
     //width: 70,
     //height: 20,
-    borderRadius: 10,
+    borderRadius: 15,
     borderWidth: 0.5,
     borderColor: "#15AB69",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#fff",
   },
   buttonText: {
     fontSize: 20,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
+    marginLeft: 25,
+    marginRight: 25,
+    marginTop: 8,
+    marginBottom: 8,
+    alignSelf: "center",
   },
   contentItem: {
     backgroundColor: "white",
@@ -47,7 +51,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: "#15AB69",
     width: "85%",
-    marginTop: "5%",
+    marginTop: 10,
     padding: 10,
     flexDirection: "column",
     alignItems: "center",

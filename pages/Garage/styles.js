@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   header: {
-    height: 60,
+    minHeight: 50,
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
@@ -22,12 +22,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
   },
-  refresh: {},
   title: {
     fontSize: 30,
+    marginTop: 15,
+    marginBottom: 5,
   },
   subtitle: {
     fontSize: 20,
@@ -38,13 +39,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     width: Dimensions.get("window").width,
+    marginBottom: 10,
   },
   contentItem: {
     backgroundColor: "white",
     borderRadius: 15,
     width: "90%",
-    marginTop: 15,
+    marginTop: 10,
     elevation: 1,
+    padding: 10,
   },
   circle: {
     width: 120,
@@ -54,6 +57,7 @@ const styles = StyleSheet.create({
   contentItemWrap: {
     flexDirection: "row",
     width: "100%",
+    marginTop: 10,
   },
   contentItemWrap2: {
     flexDirection: "column",
@@ -70,14 +74,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    width: 90,
-    height: 30,
-    borderRadius: 10,
+    borderRadius: 15,
     borderWidth: 0.5,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 5,
     alignSelf: "center",
+  },
+  deactive: {
+    borderColor: "grey",
+    color: "grey",
   },
   spotsAvail: {
     textAlign: "center",
@@ -97,6 +102,21 @@ const styles = StyleSheet.create({
     borderWidth: 10,
     justifyContent: "center",
   },
+  contentItemWrapWrap: {
+    width: Dimensions.get("window").width * 0.9 - 140,
+    alignSelf: "center",
+  },
+  textForeignFix: {
+    alignSelf: "stretch",
+    textAlign: "center",
+  },
+  textNorm: {
+    fontSize: 18,
+    margin: 5,
+  },
+  textSmall: {
+    margin: 5,
+  },
 });
 
 const chartConfig = {
@@ -105,6 +125,7 @@ const chartConfig = {
   color: (opacity = 1) => `rgba(21, 171, 105, ${opacity})`,
   strokeWidth: 2, // optional, default 3
   barPercentage: 0.5,
+  decimalPlaces: 0,
 };
 
 export { styles, chartConfig };
