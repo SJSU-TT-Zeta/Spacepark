@@ -176,10 +176,34 @@ const FrequencyNorthParking = (props) => {
 
         <View
           style={{
-            width: "100%",
-            marginTop: "2%",
+            flexDirection: "row",
+            width: Dimensions.get("window").width,
+            alignItems: "center",
           }}
         >
+          <View
+            style={{
+              marginRight: "auto",
+              marginLeft: "auto",
+            }}
+          >
+            <TouchableOpacity
+              style={{}}
+              onPress={decrementChart}
+              disabled={index == 0}
+            >
+              <Text
+                style={{
+                  fontSize: 20,
+                  margin: 10,
+                  color: index != 0 ? "black" : "grey",
+                }}
+              >
+                PREV
+              </Text>
+            </TouchableOpacity>
+          </View>
+
           <RNAnimatedScrollIndicators
             numberOfCards={7}
             scrollWidth={Dimensions.get("window").width}
@@ -187,24 +211,6 @@ const FrequencyNorthParking = (props) => {
             inActiveColor={"#fab040"}
             scrollAnimatedValue={scrollX}
           />
-        </View>
-
-        <View
-          style={{
-            flexDirection: "row",
-            width: Dimensions.get("window").width,
-          }}
-        >
-          <View
-            style={{
-              marginRight: "auto",
-              marginLeft: "auto",
-            }}
-          >
-            <TouchableOpacity style={{}} onPress={decrementChart}>
-              <Text>PREV</Text>
-            </TouchableOpacity>
-          </View>
 
           <View
             style={{
@@ -212,8 +218,16 @@ const FrequencyNorthParking = (props) => {
               marginLeft: "auto",
             }}
           >
-            <TouchableOpacity style={{}} onPress={incrementChart}>
-              <Text>NEXT</Text>
+            <TouchableOpacity onPress={incrementChart} disabled={index == 6}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  margin: 10,
+                  color: index != 6 ? "black" : "grey",
+                }}
+              >
+                NEXT
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

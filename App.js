@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar, View } from "react-native";
 
@@ -9,8 +9,7 @@ import BottomTab from "./navigators/TabNavigator";
 import "react-native-gesture-handler";
 
 const App = () => {
-  
-  useEffect( () => {
+  useEffect(() => {
     return () => auth.signOut();
   });
 
