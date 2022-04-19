@@ -13,6 +13,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import { styles, chartConfig } from "./styles";
 
+import Constants from "expo-constants"
+
 import logo from "../../assets/sp_logo.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
