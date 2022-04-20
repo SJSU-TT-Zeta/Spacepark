@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 
-import Constants from "expo-constants";
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import { Ionicons } from "@expo/vector-icons";
 import logo from "../../assets/sp_logo.png";
 import styles from "./styles";
@@ -23,22 +23,12 @@ const Info = (props) => {
   };
 
   const goToNorthFrequency = () => {
-    console.log(props);
     props.navigation.navigate("Frequency", { screen: "FrequencyNorthParking" });
   };
 
   return (
     <View style={{ backgroundColor: "#F7F8FA" }}>
-      {Platform.OS == "ios" ? (
-        <View
-          style={{
-            height: Constants.statusBarHeight,
-            backgroundColor: "#F7F8FA",
-          }}
-        />
-      ) : (
-        <></>
-      )}
+      <HeaderBar />
 
       <ScrollView
         style={{

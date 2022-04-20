@@ -14,7 +14,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { styles, chartConfig } from "./styles";
 
 import Constants from "expo-constants";
-
+import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import logo from "../../assets/sp_logo.png";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -79,16 +79,7 @@ const Garage = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {Platform.OS == "ios" ? (
-        <View
-          style={{
-            height: Constants.statusBarHeight,
-            backgroundColor: "#F7F8FA",
-          }}
-        />
-      ) : (
-        <></>
-      )}
+      <HeaderBar />
 
       <ScrollView>
         <View style={styles.header}>
