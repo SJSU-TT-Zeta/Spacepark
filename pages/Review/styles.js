@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginTop: 5,
   },
   headerItem: {
     marginLeft: "auto",
@@ -63,6 +64,10 @@ const styles = StyleSheet.create({
     marginTop: "2.5%",
     borderRadius: 5,
   },
+  submitButtonWrap: {
+    width: "100%",
+    height: "100%",
+  },
   submitTitle: {
     fontSize: 20,
     marginLeft: "auto",
@@ -80,9 +85,9 @@ const styles = StyleSheet.create({
     borderColor: "#15AB69",
     borderWidth: 1.5,
     borderRadius: 10,
-    minHeight: 60,
+    minHeight: 80,
     padding: 8,
-    marginTop: "5%",
+    marginTop: 15,
     textAlign: "center",
   },
   reviewHeader: {

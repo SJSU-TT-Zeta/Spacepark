@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   button: {
-    //width: 70,
-    //height: 20,
     borderRadius: 15,
     borderWidth: 0.5,
     borderColor: "#15AB69",
@@ -60,6 +58,11 @@ const styles = StyleSheet.create({
     backgroundColor: "pink",
     marginHorizontal: 20,
   },
+  titleWrap: {
+    flexDirection: "row",
+    width: "70%",
+    justifyContent: "center",
+  },
   contentItemTitle: {
     fontSize: 25,
     alignSelf: "center",
@@ -71,6 +74,10 @@ const styles = StyleSheet.create({
   },
   contentText2: {
     marginTop: 10,
+    fontSize: 18,
+  },
+  contentText3: {
+    marginTop: 5,
     fontSize: 18,
   },
 });

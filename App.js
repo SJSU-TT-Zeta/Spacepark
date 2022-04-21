@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar, View } from "react-native";
+import { View } from "react-native";
 
 import { auth } from "./api/api-config";
 

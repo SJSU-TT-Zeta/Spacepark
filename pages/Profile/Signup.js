@@ -5,59 +5,64 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { auth } from "../../api/api-config";
 import { getUser, createUserAccount } from "../../api/User/user-auth";
+import { MaterialIcons } from "@expo/vector-icons";
 
-import { Ionicons } from "@expo/vector-icons";
 import logo from "../../assets/sp_logo.png";
 
 import styles from "./styles";
+import globalStyles from "../globalStyle";
 
 const Login = (props) => {
-
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
-    if(auth.currentUser) {
+    if (auth.currentUser) {
       const user = getUser(auth.currentUser.uid);
-      if(user) {
+      if (user) {
         props.navigation.navigate("ProfileView");
       }
     }
   }, []);
 
-  const psuedoSignup = () => {
-    props.navigation.navigate("ProfileView");
+  const goToLogin = () => {
+    props.navigation.navigate("Login");
   };
 
   const onEmailChange = (value) => {
     setEmail(value);
-  }
+  };
 
   const onUsernameChange = (value) => {
-    setUsername(value)
-  }
+    setUsername(value);
+  };
 
   const onPasswordChange = (value) => {
-    setPassword(value)
-  }
+    setPassword(value);
+  };
 
   const onConfirmPasswordChange = (value) => {
-    setConfirmPassword(value)
-  }
+    setConfirmPassword(value);
+  };
 
   const onSubmit = async () => {
     await createUserAccount(email, username, password, confirmPassword);
-  }
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={psuedoSignup} style={styles.back}>
-          <Ionicons name="chevron-back" size={38} color="#2E2E2E" />
+    <SafeAreaView style={globalStyles.container}>
+      <View style={globalStyles.header}>
+        <TouchableOpacity onPress={goToLogin} style={globalStyles.backArrow}>
+          <MaterialIcons
+            style={globalStyles.backArrow}
+            name="arrow-back-ios"
+            size={28}
+            color="black"
+          />
         </TouchableOpacity>
-        <Image style={styles.logo} source={logo} />
+        <Image style={globalStyles.logo} source={logo} />
       </View>
       <View style={styles.content}>
         <Text style={styles.titleTwo}>Sign Up</Text>
@@ -66,10 +71,10 @@ const Login = (props) => {
             <Text style={styles.formText}>Email</Text>
           </View>
           <View style={styles.formItem2}>
-            <TextInput 
+            <TextInput
               style={styles.formInput}
-              onChangeText={onEmailChange} 
-              placeholder={"Enter Email"} 
+              onChangeText={onEmailChange}
+              placeholder={"Enter Email"}
             />
           </View>
         </View>
@@ -80,7 +85,7 @@ const Login = (props) => {
           <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
-              onChangeText={onUsernameChange} 
+              onChangeText={onUsernameChange}
               placeholder={"Enter Username"}
             />
           </View>
@@ -92,7 +97,7 @@ const Login = (props) => {
           <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
-              onChangeText={onPasswordChange} 
+              onChangeText={onPasswordChange}
               placeholder={"Enter Password"}
             />
           </View>
@@ -104,7 +109,7 @@ const Login = (props) => {
           <View style={styles.formItem2}>
             <TextInput
               style={styles.formInput}
-              onChangeText={onConfirmPasswordChange} 
+              onChangeText={onConfirmPasswordChange}
               placeholder={"Re-enter Password"}
             />
           </View>
@@ -112,10 +117,7 @@ const Login = (props) => {
         <View style={styles.formItem}>
           <View style={styles.formItem3}>
             <View style={styles.buttonHelper}>
-              <TouchableOpacity
-                onPress={onSubmit}
-                style={styles.buttonSign}
-              >
+              <TouchableOpacity onPress={onSubmit} style={styles.buttonSign}>
                 <Text style={styles.buttonText1}>Sign Up</Text>
               </TouchableOpacity>
             </View>

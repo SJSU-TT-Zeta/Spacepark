@@ -1,27 +1,19 @@
-import {
-  Text,
-  View,
-  Image,
-  Dimensions,
-  Platform,
-  ScrollView,
-} from "react-native";
+import { useEffect, useState } from "react";
+import { Text, View, Image, Dimensions, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CircularProgress from "react-native-circular-progress-indicator";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { styles, chartConfig } from "./styles";
-
-import Constants from "expo-constants";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import logo from "../../assets/sp_logo.png";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
+import CircularProgress from "react-native-circular-progress-indicator";
 import { LineChart } from "react-native-chart-kit";
-import { useEffect, useState } from "react";
-
 import StarRating from "react-native-star-rating";
+
+import { styles, chartConfig } from "./styles";
+import globalStyles from "../globalStyle";
 
 const initData = [
   {
@@ -80,13 +72,12 @@ const Garage = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBar />
-
       <ScrollView>
         <View style={styles.header}>
           <Image style={[styles.headerItem, styles.logo]} source={logo} />
           <Text style={styles.title}>Parking Garages</Text>
           <TouchableOpacity style={styles.headerItem} onPress={refreshCharts}>
-            <MaterialIcons name="refresh" size={35} color="#15AB69" />
+            <MaterialIcons name="refresh" size={36} color="#15AB69" />
           </TouchableOpacity>
         </View>
 

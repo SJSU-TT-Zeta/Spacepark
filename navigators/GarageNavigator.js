@@ -20,11 +20,6 @@ const GarageStackNavigator = () => {
         component={Info}
         options={{ headerShown: false, gestureEnabled: false }}
       />
-      <Stack.Screen
-        name="Review"
-        component={Review}
-        options={{ headerShown: false, gestureEnabled: false }}
-      />
     </Stack.Navigator>
   );
 };

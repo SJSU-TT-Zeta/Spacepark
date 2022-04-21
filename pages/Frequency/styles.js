@@ -92,6 +92,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
+  buttonText: {
+    fontSize: 20,
+    margin: 10,
+  },
 });
 
 export default styles;

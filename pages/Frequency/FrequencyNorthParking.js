@@ -1,60 +1,49 @@
-import {
-  Button,
-  Text,
-  View,
-  Image,
-  Animated,
-  FlatList,
-  Dimensions,
-} from "react-native";
+import { React, useEffect, useRef, useState } from "react";
+import { Text, View, Image, Animated, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CircularProgress from "react-native-circular-progress-indicator";
-
+import { TouchableOpacity } from "react-native-gesture-handler";
 import RNAnimatedScrollIndicators from "react-native-animated-scroll-indicators";
-
 import { MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-
-import styles from "./styles";
-
-import logo from "../../assets/sp_logo.png";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-
-import { BarChart } from "react-native-chart-kit";
-
-import globalStyles from "../globalStyle";
-import { React, useCallback, useRef, useState } from "react";
 
 import WrappedBarChart from "../../components/BarChart";
 
-const fakeData = [
+import logo from "../../assets/sp_logo.png";
+
+import styles from "./styles";
+import globalStyles from "../globalStyle";
+
+import { garageFrequency } from "../../api/Frequency/frequency";
+
+import global from "../../global/global";
+
+const initData = [
   {
-    id: "id0",
-    spotsAvailable: 800,
+    id: "sunday",
+    freq: [0, 0, 0, 0, 0, 0],
   },
   {
-    id: "id1",
-    spotsAvailable: 700,
+    id: "monday",
+    freq: [0, 0, 0, 0, 0, 0],
   },
   {
-    id: "id2",
-    spotsAvailable: 600,
+    id: "tuesday",
+    freq: [0, 0, 0, 0, 0, 0],
   },
   {
-    id: "id3",
-    spotsAvailable: 500,
+    id: "wednesday",
+    freq: [0, 0, 0, 0, 0, 0],
   },
   {
-    id: "id4",
-    spotsAvailable: 400,
+    id: "thursday",
+    freq: [0, 0, 0, 0, 0, 0],
   },
   {
-    id: "id5",
-    spotsAvailable: 300,
+    id: "friday",
+    freq: [0, 0, 0, 0, 0, 0],
   },
   {
-    id: "id6",
-    spotsAvailable: 200,
+    id: "saturday",
+    freq: [0, 0, 0, 0, 0, 0],
   },
 ];
 
@@ -68,18 +57,45 @@ const dates = [
   "Saturday",
 ];
 
+const ex = {
+  monday: [140, 643, 723, 756, 720, 374],
+  sunday: [140, 356, 376, 340, 303, 287],
+  thursday: [""],
+  tuesday: [""],
+  wednesday: [""],
+};
+
 const FrequencyNorthParking = (props) => {
   const help = new Animated.Value(0);
   const scrollX = useRef(help).current;
   const flatListRef = useRef(null);
   const [index, setIndex] = useState(0);
+  const [chartData, setChartData] = useState(initData);
+  const [rendered, setRender] = useState(false);
+
+  useEffect(async () => {
+    if (global.charts !== undefined) {
+      setChartData(global.charts);
+    }
+
+    const frequency = await garageFrequency("North");
+
+    let i;
+    const copyData = [...chartData];
+
+    for (i = 0; i < dates.length; i++) {
+      copyData[i].freq = frequency[dates[i].toLowerCase()];
+    }
+    setChartData(copyData);
+    global.charts = copyData;
+  }, [rendered]);
 
   const goToGarageView = () => {
     props.navigation.navigate("FrequencyView");
   };
 
   const incrementChart = () => {
-    if (index < fakeData.length - 1) {
+    if (index < chartData.length - 1) {
       flatListRef.current.scrollToIndex({ index: index + 1 });
       setIndex(index + 1);
     }
@@ -118,35 +134,12 @@ const FrequencyNorthParking = (props) => {
           <Text
             style={{
               fontSize: 25,
-              marginTop: "auto",
-              marginBottom: "auto",
               width: "50%",
               textAlign: "center",
             }}
           >
             {dates[index]}
           </Text>
-          <View
-            style={{
-              flexGrow: 1,
-              marginTop: "auto",
-              marginBottom: "auto",
-              width: "50%",
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 15,
-                alignSelf: "stretch",
-                textAlign: "center",
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>
-                {`${fakeData[index].spotsAvailable} `}{" "}
-              </Text>
-              spots available
-            </Text>
-          </View>
         </View>
 
         <View style={{ height: 300, marginTop: 10 }}>
@@ -164,8 +157,10 @@ const FrequencyNorthParking = (props) => {
               height: 300,
               width: Dimensions.get("window").width,
             }}
-            data={fakeData}
-            renderItem={() => <WrappedBarChart />}
+            data={chartData}
+            renderItem={(item) => (
+              <WrappedBarChart data={item.item} renderCheck={setRender} />
+            )}
             keyExtractor={(item) => item.id}
             onScroll={Animated.event(
               [{ nativeEvent: { contentOffset: { x: scrollX } } }],
@@ -220,11 +215,12 @@ const FrequencyNorthParking = (props) => {
           >
             <TouchableOpacity onPress={incrementChart} disabled={index == 6}>
               <Text
-                style={{
-                  fontSize: 20,
-                  margin: 10,
-                  color: index != 6 ? "black" : "grey",
-                }}
+                style={[
+                  styles.buttonText,
+                  {
+                    color: index != 6 ? "black" : "grey",
+                  },
+                ]}
               >
                 NEXT
               </Text>

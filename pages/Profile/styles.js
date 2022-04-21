@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   },
   logText: {
     fontSize: 22,
+    color: "#E41919",
   },
   delete: {
     marginBottom: 12,

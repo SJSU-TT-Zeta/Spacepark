@@ -1,25 +1,18 @@
 import React from "react";
-import { View, Text, Image, Dimensions, Platform } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { View, Text, Image } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
-import { Ionicons } from "@expo/vector-icons";
+
 import logo from "../../assets/sp_logo.png";
+
 import styles from "./styles";
-import { StatusBar } from "expo-status-bar";
+import globalStyles from "../globalStyle";
 
 const Info = (props) => {
-  const psuedoHome = () => {
+  const goToHome = () => {
     props.navigation.navigate("GarageView");
-  };
-
-  const goToReviews = () => {
-    props.navigation.navigate("Review");
   };
 
   const goToNorthFrequency = () => {
@@ -37,30 +30,21 @@ const Info = (props) => {
         contentContainerStyle={styles.container}
         bounces={false}
       >
-        <View style={styles.header}>
-          <TouchableOpacity onPress={psuedoHome} style={styles.back}>
+        <View style={globalStyles.header}>
+          <TouchableOpacity onPress={goToHome} style={globalStyles.backArrow}>
             <Ionicons name="chevron-back" size={38} color="#2E2E2E" />
           </TouchableOpacity>
-          <Image style={styles.logo} source={logo} />
+          <Image style={globalStyles.logo} source={logo} />
         </View>
 
         <View style={styles.content}>
           <Text style={styles.title}>SJSU North Parking Garage</Text>
-          <View
-            style={{
-              flexDirection: "row",
-              width: "70%",
-              justifyContent: "space-between",
-            }}
-          >
+          <View style={styles.titleWrap}>
             <TouchableOpacity
               style={styles.button}
               onPress={goToNorthFrequency}
             >
               <Text style={styles.buttonText}>Charts</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={goToReviews}>
-              <Text style={styles.buttonText}>Reviews</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -68,23 +52,23 @@ const Info = (props) => {
         <View style={styles.contentItem}>
           <Text style={styles.contentItemTitle}>Total parking spots</Text>
           <View style={{ width: "80%" }}>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
+            <Text style={styles.contentText3}>
               General -----------------{" "}
               <Text style={{ fontWeight: "bold" }}> 1,445</Text>
             </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
+            <Text style={styles.contentText3}>
               Disabled ----------------{" "}
               <Text style={{ fontWeight: "bold" }}>8 </Text>
             </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
+            <Text style={styles.contentText3}>
               Employee ---------------{" "}
               <Text style={{ fontWeight: "bold" }}>335</Text>
             </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
+            <Text style={styles.contentText3}>
               R-Permit ----------------{" "}
               <Text style={{ fontWeight: "bold" }}>7</Text>
             </Text>
-            <Text style={{ marginTop: 5, fontSize: 18 }}>
+            <Text style={styles.contentText3}>
               30-Min Time Zone ------{" "}
               <Text style={{ fontWeight: "bold" }}>22</Text>
             </Text>

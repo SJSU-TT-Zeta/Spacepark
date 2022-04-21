@@ -12,18 +12,17 @@ const globalStyles = StyleSheet.create({
     height: 60,
     width: "100%",
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   logo: {
     width: 38,
     height: 38,
     marginLeft: "auto",
     marginRight: 8,
-    marginTop: 15,
   },
   backArrow: {
-    marginTop: 15,
-    marginLeft: 20,
-    alignSelf: "center",
+    marginLeft: 8,
   },
 });
 
