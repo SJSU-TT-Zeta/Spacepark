@@ -31,14 +31,18 @@ const Frequency = (props) => {
         </View>
 
         <View style={[styles.item, styles.freqItem]}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.garageLabel}>SJSU South Garage</Text>
+          <TouchableOpacity style={styles.button} disabled={true}>
+            <Text style={[styles.garageLabel, styles.disabledLabel]}>
+              SJSU South Garage
+            </Text>
           </TouchableOpacity>
         </View>
 
         <View style={[styles.item, styles.freqItem]}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.garageLabel}>SJSU West Garage</Text>
+          <TouchableOpacity style={styles.button} disabled={true}>
+            <Text style={[styles.garageLabel, styles.disabledLabel]}>
+              SJSU West Garage
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

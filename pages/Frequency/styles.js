@@ -82,6 +82,9 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     alignSelf: "center",
   },
+  disabledLabel: {
+    color: "grey",
+  },
   otherLabel: {
     fontSize: 20,
     fontWeight: "normal",

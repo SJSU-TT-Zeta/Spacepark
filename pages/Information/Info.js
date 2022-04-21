@@ -15,6 +15,10 @@ const Info = (props) => {
     props.navigation.navigate("GarageView");
   };
 
+  const goToReviews = () => {
+    props.navigation.navigate("Review");
+  };
+
   const goToNorthFrequency = () => {
     props.navigation.navigate("Frequency", { screen: "FrequencyNorthParking" });
   };
@@ -39,12 +43,21 @@ const Info = (props) => {
 
         <View style={styles.content}>
           <Text style={styles.title}>SJSU North Parking Garage</Text>
-          <View style={styles.titleWrap}>
+          <View
+            style={{
+              flexDirection: "row",
+              width: "70%",
+              justifyContent: "space-between",
+            }}
+          >
             <TouchableOpacity
               style={styles.button}
               onPress={goToNorthFrequency}
             >
               <Text style={styles.buttonText}>Charts</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={goToReviews}>
+              <Text style={styles.buttonText}>Reviews</Text>
             </TouchableOpacity>
           </View>
         </View>
