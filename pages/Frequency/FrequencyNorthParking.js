@@ -108,6 +108,13 @@ const FrequencyNorthParking = (props) => {
     }
   };
 
+  const refreshPage = () => {
+    setRender((oldState) => {
+      return !oldState;
+    });
+    console.logO(rendered);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={globalStyles.header}>
@@ -226,6 +233,11 @@ const FrequencyNorthParking = (props) => {
               </Text>
             </TouchableOpacity>
           </View>
+          <TouchableOpacity onPress={refreshPage}>
+            <Text style={{ width: 50, height: 50, backgroundColor: "grey" }}>
+              Test
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
