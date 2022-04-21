@@ -1,2 +1,3 @@
 # Theta Tau Zeta Class Technical Project App
-Repository for the React Native front end application 
+
+Repository for Theta Tau Zeta Class Technical Project
