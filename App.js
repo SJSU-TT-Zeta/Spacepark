@@ -15,7 +15,6 @@ const App = () => {
 
   return (
     <View style={{ height: "100%", width: "100%" }}>
-      <StatusBar backgroundColor={"white"} barStyle="dark-content" />
       <NavigationContainer>
         <BottomTab />
       </NavigationContainer>
