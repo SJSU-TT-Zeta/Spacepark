@@ -9,3 +9,7 @@ npm install
 expo install
 expo start
 ```
+
+[Project Proposal](Spring_2022_Project_Proposal.pdf)
+
+[Final Project Presentation](Spring_2022_Final_Project_Presentation.pdf)
